@@ -34,18 +34,18 @@ document.addEventListener("keydown",direction);
 
 function direction(event)
 {
-    if(event.keyCode == 37){
+    if(event.keyCode == 37 && d != "RIGHT"){
         d = "LEFT";
     } 
-    else if (event.keyCode == 38) 
+    else if (event.keyCode == 38 && d != "DOWN") 
     {
         d = "UP";
     }
-    else if (event.keyCode == 39) 
+    else if (event.keyCode == 39 && d != "LEFT") 
     {
         d = "RIGHT";
     }
-    else if (event.keyCode == 40) 
+    else if (event.keyCode == 40 && d != "UP") 
     {
         d = "DOWN";
     }
@@ -71,14 +71,33 @@ function draw()
      let snakeX = snake[0].x;
      let snakeY = snake[0].y;
 
-     //remove the tail 
-     snake.pop();
+    
 
      //direction 
      if( d == "LEFT") snakeX -=box;
      if( d == "UP") snakeY -=box;
      if( d == "RIGHT") snakeX +=box;
      if( d == "DOWN") snakeY +=box;
+
+     //if the snake eats food 
+     if(snakeX == food.x && snakeY == food.y)
+     {
+         score++;
+         food= {
+            x: Math.floor(Math.random()*7+1)*box,
+            y: Math.floor(Math.random()*15+3)*box
+         }
+         // we don't remove the tail 
+     } 
+     else {
+           //remove the tail 
+           snake.pop();
+     }
+     //game over 
+     if(snakeX < box || snakeX > 17*box || snakeY < 3*box || snakeY > 17*box)
+     {
+         clearInterval(game);
+     }
 
     // add new head 
     let newHead = {
