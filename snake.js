@@ -27,6 +27,29 @@ let food = {
 //create the score 
 let score =0;
 
+//control the snake 
+let d;
+document.addEventListener("keydown",direction);
+
+function direction(event)
+{
+    if(event.keyCode == 37){
+        d = "LEFT";
+    } 
+    else if (event.keyCode == 38) 
+    {
+        d = "UP";
+    }
+    else if (event.keyCode == 39) 
+    {
+        d = "RIGHT";
+    }
+    else if (event.keyCode == 40) 
+    {
+        d = "DOWN";
+    }
+}
+
 // draw function 
 function draw()
 {
@@ -42,6 +65,28 @@ function draw()
      }
 
      ctx.drawImage(foodImg, food.x, food.y);
+
+     //old head position 
+     let snakeX = snake[0].x;
+     let snakeY = snake[0].y;
+
+     //remove the tail 
+     snake.pop();
+
+     //direction 
+     if( d = "LEFT ") snakeX -=box;
+     if( d = "UP ") snakeY -=box;
+     if( d = "RIGHT ") snakeX +=box;
+     if( d = "DOWN ") snakeY +=box;
+
+
+     
+
+
+     ctx.fillStyle ="white";
+     ctx.font = "45px Changa one ";
+     ctx.fillText(score,2*box,1.6*box);
+
 
 }
 
