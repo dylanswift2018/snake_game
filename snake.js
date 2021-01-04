@@ -29,6 +29,7 @@ let score =0;
 
 //control the snake 
 let d;
+
 document.addEventListener("keydown",direction);
 
 function direction(event)
@@ -57,7 +58,7 @@ function draw()
 
      for(let i=0;i< snake.length; i++)
      {
-         ctx.fillStyle= (i==0)? "green":"white";
+         ctx.fillStyle = (i == 0 ) ? "green":"white";
          ctx.fillRect(snake[i].x,snake[i].y,box,box);
 
          ctx.strokeStyle= "red";
@@ -74,19 +75,22 @@ function draw()
      snake.pop();
 
      //direction 
-     if( d = "LEFT ") snakeX -=box;
-     if( d = "UP ") snakeY -=box;
-     if( d = "RIGHT ") snakeX +=box;
-     if( d = "DOWN ") snakeY +=box;
+     if( d == "LEFT") snakeX -=box;
+     if( d == "UP") snakeY -=box;
+     if( d == "RIGHT") snakeX +=box;
+     if( d == "DOWN") snakeY +=box;
 
+    // add new head 
+    let newHead = {
+        x : snakeX,
+        y : snakeY
+     }
 
+    snake.unshift(newHead);
      
-
-
      ctx.fillStyle ="white";
      ctx.font = "45px Changa one ";
      ctx.fillText(score,2*box,1.6*box);
-
 
 }
 
