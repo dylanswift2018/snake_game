@@ -11,6 +11,9 @@ ground.src= "img/ground.png";
 const foodImg = new Image();
 foodImg.src= "img/food.png";
 
+//load audio files 
+
+
 //create the snake  
 let snake = [];
 snake[0] = {
@@ -49,6 +52,20 @@ function direction(event)
     {
         d = "DOWN";
     }
+}
+
+// check collision 
+function collision(head,array)
+{
+    for(let i =0 ;i<array.length; i++)
+    {
+        if(head.x == array[i].x && head.y == array[i].y)
+        {
+            return true;
+        }
+        
+    }
+    return false;
 }
 
 // draw function 
@@ -93,18 +110,20 @@ function draw()
            //remove the tail 
            snake.pop();
      }
-     //game over 
-     if(snakeX < box || snakeX > 17*box || snakeY < 3*box || snakeY > 17*box)
-     {
-         clearInterval(game);
-     }
 
-    // add new head 
+     // add new head 
     let newHead = {
         x : snakeX,
         y : snakeY
      }
 
+     //game over 
+     if(snakeX < box || snakeX > 17*box || snakeY < 3*box || snakeY > 17*box || collision(newHead,snake))
+     {
+         clearInterval(game);
+     }
+
+    
     snake.unshift(newHead);
      
      ctx.fillStyle ="white";
