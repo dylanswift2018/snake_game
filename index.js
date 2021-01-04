@@ -1,0 +1,1 @@
+const cvs=document.getElementById('canvas');
